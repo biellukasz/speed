@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Speed Meter</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+        #speedDisplay {
+            font-size: 24px;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2 class="text-center">Speed Meter</h2>
+
+    <div class="form-group">
+        <label for="distance">Distance (in meters):</label>
+        <input type="number" id="distance" name="distance" class="form-control" value="">
+    </div>
+
+    <div class="form-group">
+        <label for="start">Start Time (in minutes):</label>
+        <input type="number" id="start" name="start" class="form-control" value="">
+    </div>
+
+    <button onclick="start()" class="btn btn-primary">Start Speed</button>
+
+    <p id="speedDisplay" class="text-center">0 m/min</p>
+</div>
+
+<script src="speedCalc.js"></script>
+
+</body>
+</html>
