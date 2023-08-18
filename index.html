@@ -2,21 +2,32 @@
 <html>
 <head>
     <title>Speed Meter</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <style>
         .container {
             margin-top: 50px;
         }
+
         #speedDisplay {
-            font-size: 24px;
+            font-size: 48px;
             font-weight: 600;
+        }
+
+        .form-group label, .form-control {
+            font-size: 24px;
+        }
+
+        .btn {
+            font-size: 24px;
+            padding: 15px 30px;
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2 class="text-center">Speed Meter</h2>
+    <h2 class="text-center mb-5">Speed Meter</h2>
 
     <div class="form-group">
         <label for="distance">Distance (in meters):</label>
@@ -28,9 +39,9 @@
         <input type="number" id="start" name="start" class="form-control" value="">
     </div>
 
-    <button onclick="start()" class="btn btn-primary">Start Speed</button>
+    <button onclick="start()" class="btn btn-primary btn-lg">Start Speed</button>
 
-    <p id="speedDisplay" class="text-center">0 m/min</p>
+    <p id="speedDisplay" class="text-center mt-5">0 m/min</p>
 </div>
 
 <script src="speedCalc.js"></script>
