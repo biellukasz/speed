@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Speed Meter (km/h)</title>
+    <title>Speed Meter (m/min)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <style>
@@ -16,7 +16,7 @@
 <body>
 
 <div class="container">
-    <h2 class="text-center mb-5">Speed Meter (km/h)</h2>
+    <h2 class="text-center mb-5">Speed Meter (m/min)</h2>
 
     <div class="form-group">
         <label for="distance">Distance (in kilometers):</label>
@@ -35,7 +35,7 @@
         <button id="stopBtn" onclick="stop()" class="btn btn-danger ml-3" disabled>Stop/Reset</button>
     </div>
 
-    <p id="speedDisplay" class="text-center mt-5">0 km/h</p>
+    <p id="speedDisplay" class="text-center mt-5">0 m/min</p>
     <p id="elapsedTime" class="text-center"></p>
 </div>
 

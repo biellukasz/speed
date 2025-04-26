@@ -1,9 +1,9 @@
 let intervalId = null;
 let releaseTimestamp = 0;
-let distance = 0;
+let distanceInMeters = 0;
 
 function start() {
-    clearInterval(intervalId); // Clear previous interval if any
+    clearInterval(intervalId); // Clear any previous interval
 
     const distanceInput = parseFloat(document.getElementById("distance").value);
     const releaseTimeInput = document.getElementById("releaseTime").value;
@@ -14,10 +14,10 @@ function start() {
         return;
     }
 
-    errorDisplay.textContent = ""; // Clear error
+    errorDisplay.textContent = ""; // Clear error message
 
     releaseTimestamp = new Date(releaseTimeInput).getTime(); // Release time in ms
-    distance = distanceInput;
+    distanceInMeters = distanceInput * 1000; // Convert km to meters
 
     if (releaseTimestamp >= Date.now()) {
         errorDisplay.textContent = "Release time must be in the past.";
@@ -27,14 +27,14 @@ function start() {
     document.getElementById("startBtn").disabled = true;
     document.getElementById("stopBtn").disabled = false;
 
-    calculateSpeed(); // Immediate calculation
+    calculateSpeed(); // First calculation immediately
     intervalId = setInterval(calculateSpeed, 2000); // Update every 2 seconds
 }
 
 function stop() {
     clearInterval(intervalId);
     intervalId = null;
-    document.getElementById("speedDisplay").innerHTML = "0 km/h";
+    document.getElementById("speedDisplay").innerHTML = "0 m/min";
     document.getElementById("elapsedTime").innerHTML = "";
     document.getElementById("startBtn").disabled = false;
     document.getElementById("stopBtn").disabled = true;
@@ -49,9 +49,9 @@ function calculateSpeed() {
         return;
     }
 
-    const timeElapsedHours = timeElapsedMs / (1000 * 60 * 60); // Convert ms to hours
-    const speed = distance / timeElapsedHours;
+    const timeElapsedMinutes = timeElapsedMs / (1000 * 60); // Convert ms to minutes
+    const speed = distanceInMeters / timeElapsedMinutes; // m/min
 
-    document.getElementById("speedDisplay").innerHTML = speed.toFixed(2) + " km/h";
-    document.getElementById("elapsedTime").innerHTML = `Elapsed Time: ${timeElapsedHours.toFixed(2)} hours`;
+    document.getElementById("speedDisplay").innerHTML = speed.toFixed(2) + " m/min";
+    document.getElementById("elapsedTime").innerHTML = `Elapsed Time: ${timeElapsedMinutes.toFixed(2)} minutes`;
 }
