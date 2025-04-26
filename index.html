@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Speed Meter</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
@@ -11,16 +12,22 @@
 
         #speedDisplay {
             font-size: 48px;
-            font-weight: 600;
+            font-weight: 700;
         }
 
-        .form-group label, .form-control {
+        #elapsedTime {
             font-size: 24px;
+            color: #555;
         }
 
         .btn {
-            font-size: 24px;
-            padding: 15px 30px;
+            font-size: 20px;
+            padding: 12px 25px;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 18px;
         }
     </style>
 </head>
@@ -31,17 +38,23 @@
 
     <div class="form-group">
         <label for="distance">Distance (in meters):</label>
-        <input type="number" id="distance" name="distance" class="form-control" value="">
+        <input type="number" id="distance" name="distance" class="form-control" placeholder="Enter distance in meters">
     </div>
 
     <div class="form-group">
-        <label for="start">Start Time (in minutes):</label>
-        <input type="number" id="start" name="start" class="form-control" value="">
+        <label for="start">Start Time (minutes ago):</label>
+        <input type="number" id="start" name="start" class="form-control" placeholder="How many minutes ago was the release?">
     </div>
 
-    <button onclick="start()" class="btn btn-primary btn-lg">Start Speed</button>
+    <p id="error" class="error-message"></p>
+
+    <div class="text-center">
+        <button id="startBtn" onclick="start()" class="btn btn-primary">Start</button>
+        <button id="stopBtn" onclick="stop()" class="btn btn-danger ml-3" disabled>Stop/Reset</button>
+    </div>
 
     <p id="speedDisplay" class="text-center mt-5">0 m/min</p>
+    <p id="elapsedTime" class="text-center"></p>
 </div>
 
 <script src="speedCalc.js"></script>

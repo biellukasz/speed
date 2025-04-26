@@ -1,28 +1,54 @@
-let startTimeAgo = document.getElementById("start").value;
-let releasingTime = new Date().getTime() / (1000 * 60) - startTimeAgo;
-let distance = document.getElementById("distance").value;
+let intervalId = null;
+let startTimeAgo = 0;
+let releasingTime = 0;
+let distance = 0;
 
-let speed = 0;
 function start() {
-    startTimeAgo = document.getElementById("start").value;
-    releasingTime = new Date().getTime() / (1000 * 60) - startTimeAgo;
-    distance = document.getElementById("distance").value;
-    setInterval(calculateSpeed, 2000);  //calls calculateSpeed function every second
+    clearInterval(intervalId); // Clear previous interval if any
+
+    const distanceInput = document.getElementById("distance").value;
+    const startInput = document.getElementById("start").value;
+    const errorDisplay = document.getElementById("error");
+
+    distance = parseFloat(distanceInput);
+    startTimeAgo = parseFloat(startInput);
+
+    if (isNaN(startTimeAgo) || isNaN(distance) || startTimeAgo < 0 || distance <= 0) {
+        errorDisplay.textContent = "Please enter valid positive numbers for distance and time.";
+        return;
+    }
+
+    errorDisplay.textContent = ""; // Clear error message
+
+    releasingTime = new Date().getTime() / (1000 * 60); // Current time in minutes
+
+    document.getElementById("startBtn").disabled = true;
+    document.getElementById("stopBtn").disabled = false;
+
+    calculateSpeed(); // Immediate first calculation
+    intervalId = setInterval(calculateSpeed, 2000); // Update every 2 seconds
 }
 
+function stop() {
+    clearInterval(intervalId);
+    intervalId = null;
+    document.getElementById("speedDisplay").innerHTML = "0 m/min";
+    document.getElementById("elapsedTime").innerHTML = "";
+    document.getElementById("startBtn").disabled = false;
+    document.getElementById("stopBtn").disabled = true;
+}
 
 function calculateSpeed() {
-     // getting value of start time from input field
-    console.log("start time: " + startTimeAgo);
-    console.log("releasing time: " + releasingTime);
-    console.log("distance: " + distance);
-    if(speed === 0) {
-    speed = distance / startTimeAgo; // calculate speed
-    } else {
-        let currentTime = new Date().getTime() / (1000 * 60);
-        let time = currentTime - releasingTime;
-        speed = distance / time;
+    const currentTime = new Date().getTime() / (1000 * 60); // Current time in minutes
+    const timeElapsed = currentTime - releasingTime + startTimeAgo;
 
+    if (timeElapsed <= 0) {
+        document.getElementById("speedDisplay").innerHTML = "Waiting for time to pass...";
+        return;
     }
-    document.getElementById("speedDisplay").innerHTML = speed + " m/min";
+
+    const speed = distance / timeElapsed;
+
+    document.getElementById("speedDisplay").innerHTML = speed.toFixed(2) + " m/min";
+    document.getElementById("elapsedTime").innerHTML = `Elapsed Time: ${timeElapsed.toFixed(2)} minutes`;
 }
