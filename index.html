@@ -2,48 +2,30 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Speed Meter</title>
+    <title>Speed Meter (km/h)</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
     <style>
-        .container {
-            margin-top: 50px;
-        }
-
-        #speedDisplay {
-            font-size: 48px;
-            font-weight: 700;
-        }
-
-        #elapsedTime {
-            font-size: 24px;
-            color: #555;
-        }
-
-        .btn {
-            font-size: 20px;
-            padding: 12px 25px;
-        }
-
-        .error-message {
-            color: red;
-            font-size: 18px;
-        }
+        .container { margin-top: 50px; }
+        #speedDisplay { font-size: 48px; font-weight: 700; }
+        #elapsedTime { font-size: 24px; color: #555; }
+        .btn { font-size: 20px; padding: 12px 25px; }
+        .error-message { color: red; font-size: 18px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2 class="text-center mb-5">Speed Meter</h2>
+    <h2 class="text-center mb-5">Speed Meter (km/h)</h2>
 
     <div class="form-group">
-        <label for="distance">Distance (in meters):</label>
-        <input type="number" id="distance" name="distance" class="form-control" placeholder="Enter distance in meters">
+        <label for="distance">Distance (in kilometers):</label>
+        <input type="number" id="distance" name="distance" class="form-control" placeholder="Enter distance in kilometers">
     </div>
 
     <div class="form-group">
-        <label for="start">Start Time (minutes ago):</label>
-        <input type="number" id="start" name="start" class="form-control" placeholder="How many minutes ago was the release?">
+        <label for="releaseTime">Release Time:</label>
+        <input type="datetime-local" id="releaseTime" name="releaseTime" class="form-control">
     </div>
 
     <p id="error" class="error-message"></p>
@@ -53,7 +35,7 @@
         <button id="stopBtn" onclick="stop()" class="btn btn-danger ml-3" disabled>Stop/Reset</button>
     </div>
 
-    <p id="speedDisplay" class="text-center mt-5">0 m/min</p>
+    <p id="speedDisplay" class="text-center mt-5">0 km/h</p>
     <p id="elapsedTime" class="text-center"></p>
 </div>
 
